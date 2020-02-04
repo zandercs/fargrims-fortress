@@ -34,14 +34,41 @@ class Monster extends Component {
     if(this.state.monster){
       console.log(Object.keys(this.state.monster));
     }
+
     return (
       <div className="monsterDisplay">
-        <h4>{monster && monster.name}</h4>
+        {/*<h4>{monster && monster.name}</h4>
         <p>HP: {monster && monster.hit_points}</p>
         <p>AC: {monster && monster.armor_class}</p>
         <p>Speed:<br/>{monster && Object.keys(monster.speed).map(item => {
           return `${item}: ${monster.speed[item]} | `
-        })}</p>
+        })}</p>*/}
+
+        {monster && Object.keys(this.state.monster).map(item => {
+          if(!['_id','index','url'].includes(item))
+            switch (item) {
+              case 'speed':
+                return <p key={item}>{item}:<br/>{Object.keys(monster[item]).map(item => {
+                  return `${item}: ${monster.speed[item]} || `
+                })}</p>
+                break;
+              case "proficiencies":
+                let profs = monster[item];
+                return <div>{item}:<br/>{Object.keys(profs).map(x => {
+                  return <p key={profs[x].name+profs[x].value}>{`${profs[x].name}: ${profs[x].value}`}</p>
+                })}</div>
+                break;
+              case "actions" || "legendary_actions":
+                let acts = monster[item];
+                return <div>{item}:<br/>{Object.keys(acts).map(x => {
+                  return <p key={acts[x].name}>{`${acts[x].name}: ${acts[x].desc}`}</p>
+                })}</div>
+                break;
+              default:
+                return <p key={item}>{`${item}: ${JSON.stringify(monster[item])}`}</p>
+            }
+          //return <p key={item}>{`${item}: ${JSON.stringify(monster[item])}`}</p>
+        })}
       </div>
     );
   }
