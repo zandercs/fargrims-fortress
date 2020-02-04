@@ -1,4 +1,5 @@
 import React,{ Component } from 'react';
+import Monster from './components/Monster';
 import './App.css';
 
 class App extends Component {
@@ -6,7 +7,14 @@ class App extends Component {
     super(props);
 
     this.state = {
+      monsterIndex: undefined
     };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({monsterIndex: event.target.value});
   }
 
   componentDidMount() {
@@ -14,6 +22,7 @@ class App extends Component {
       'monsters':'monsters',
       'spells':'spells'
     };
+    // make each api call and populate state
     for (const apiCall in apiCalls) {
       console.log(`${apiCall} : ${apiCalls[apiCall]}`);
       fetch(`http://www.dnd5eapi.co/api/${apiCall}`)
@@ -21,53 +30,30 @@ class App extends Component {
         .then(
           (result) => {
             console.log('result-items: '+JSON.stringify(result));
-            this.setState({[`${apiCall}List`]: result.results,[`${apiCall}Ready`]:true});
+            this.setState({[`${apiCall}List`]: result.results});
           },
           (error) => {
             console.log('result-items:'+error)
           }
         )
     }
-
-    // let monsterList = 'http://www.dnd5eapi.co/api/monsters';
-    // fetch(monsterList)
-    //   .then(res => res.json())
-    //   .then(
-    //     (result) => {
-    //       console.log('result-items: '+JSON.stringify(result));
-    //       this.setState({monsterList: result.results});
-    //     },
-    //     (error) => {
-    //       console.log('result-items:'+error)
-    //     }
-    //   )
-    //
-    //   let spellsList = 'http://www.dnd5eapi.co/api/spells';
-    //   fetch(spellsList)
-    //     .then(res => res.json())
-    //     .then(
-    //       (result) => {
-    //         console.log('result-items: '+JSON.stringify(result));
-    //         this.setState({spellsList: result});
-    //       },
-    //       (error) => {
-    //         console.log('result-items:'+error)
-    //       }
-    //     )
   }
   render(){
     return (
       <div className="App">
         <label>Monster: </label>
-        <select name="selectedMonster">
-          <option value="false">Choose a monster...</option>
+        <select value={this.state.monsterIndex} onChange={this.handleChange} name="selectedMonster">
+          <option value="">Choose a monster...</option>
         {this.state && this.state.monstersList && this.state.monstersList.map((monster, index)=>{
           return <option value={monster.url} key={index}>{monster.name}</option>
         })}
         </select>
+        <Monster monsterIndex={this.state.monsterIndex} />
       </div>
     );
   }
 }
+// <Monster monsterIndex={this.state.monsterIndex} />
+
 
 export default App;
