@@ -294,7 +294,7 @@ class Monster extends Component {
           <p>AC: {monster.armor_class}</p>
         </div>
 
-        <div className="statSection"><p><b>Speed:</b></p>{Object.keys(monster.speed).map((item, i) => {
+        <div className="statSection"><p><b>Speed:</b></p>{monster.speed && Object.keys(monster.speed).map((item, i) => {
           // return `${item}: ${monster.speed[item]} | `
           return <p key={i}>{item}<br/>{monster.speed[item]}</p>
         })}</div>
@@ -305,62 +305,76 @@ class Monster extends Component {
           })}
         </div>
 
-
+        {monster.proficiencies.length > 0 &&
         <div className="statSection">
           <h4>Proficiencies:</h4>
-          {Object.keys(monster.proficiencies).map((item, i) => {
+          {monster.proficiencies.length > 0 && Object.keys(monster.proficiencies).map((item, i) => {
             // return `${item}: ${monster.speed[item]} | `
             return <p key={item}>{monster.proficiencies[i].name}<br/>
                     {monster.proficiencies[i].value}</p>
           })}
         </div>
+        }
+        {monster.damage_vulnerabilities.length > 0 &&
         <div className="statSection">
           <h4>Damage Vulnerabilities:</h4>
           {Object.keys(monster.damage_vulnerabilities).map((item, i) => {
             return <p key={i}>{monster.damage_vulnerabilities[i]}</p>
           })}
         </div>
+        }
+        {monster.damage_resistances.length > 0 &&
         <div className="statSection">
           <h4>Damage Resistances:</h4>
           {Object.keys(monster.damage_resistances).map((item, i) => {
             return <p key={i}>{monster.damage_resistances[i]}</p>
           })}
         </div>
+        }
+        {monster.damage_immunities.length > 0 &&
         <div className="statSection">
           <h4>Damage Immunities:</h4>
           {Object.keys(monster.damage_immunities).map((item, i) => {
             return <p key={i}>{monster.damage_immunities[i]}</p>
           })}
         </div>
+        }
+        {monster.condition_immunities.length > 0 &&
         <div className="statSection">
           <h4>Condition Immunities:</h4>
           {Object.keys(monster.condition_immunities).map((item, i) => {
             return <p key={i}>{monster.condition_immunities[i].name}</p>
           })}
         </div>
+        }
+        {monster.senses &&
         <div className="statSection">
           <h4>Senses:</h4>
           {Object.keys(monster.senses).map((i) => {
             return <p key={i}>{i}<br/>{monster.senses[i]}</p>
           })}
         </div>
+        }
         <div className="statSection">
           <h4>Languages:</h4>
           <p>{monster.languages}</p>
         </div>
+        {monster.special_abilities.length > 0 &&
         <div className="verboseStatSection">
           <h2>Special abilities:</h2>
           {Object.keys(monster.special_abilities).map((item, i) => {
             return <div key={i}><h3>{monster.special_abilities[i].name}</h3><p>{monster.special_abilities[i].desc}</p></div>
           })}
         </div>
+        }
+        {monster.actions.length > 0 &&
         <div className="verboseStatSection">
           <h2>Actions:</h2>
           {Object.keys(monster.actions).map((item, i) => {
             return <div key={i}><h3>{monster.actions[i].name}</h3><p>{monster.actions[i].desc}</p></div>
           })}
         </div>
-
+        }
       {/*
         ["strength",
         "dexterity",
