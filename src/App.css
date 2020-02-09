@@ -2,8 +2,13 @@ body{
   background-color: #313333;
 }
 
+h1,h2 {color: darkcyan;}
+h1 {margin:40px 0 3px 0;}
+
+h3, h4 {color: violet;}
+
 .App {
-  margin-left: 1%;
+  margin: 2%;
   color:#fff;
 }
 
@@ -29,25 +34,31 @@ body{
 }
 
 .monsterDisplay .verboseStatSection p {
-  margin:0 0 30px 0;
+  margin:0 0 25px 0;
 }
 .verboseStatSection {
-  border-top: 1px solid cyan;
+  border-top: 1px solid darkviolet;
 }
 
 .statSection {
-  display: flex;
   text-transform: capitalize;
-  text-align: center;
+  text-align: left;
+  /* margin: 25px 0; */
+}
+
+.statSection h4 {
   margin: 0;
 }
 
 .statSection p {
   margin-right: 25px;
+  text-align: center;
 }
 .statSection span {
   display: inline-flex;
 }
+
+.stats {display: flex;text-transform: capitalize;margin: 0;}
 
 @media (prefers-reduced-motion: no-preference) {
   .spin {

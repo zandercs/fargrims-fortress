@@ -282,82 +282,106 @@ class Monster extends Component {
       monster &&
       <div className="monsterDisplay">
         <div className="statSection">
-          <h1>{monster.name}<br/>
-          <span className="italic">{monster.alignment}</span><br/>
-          <span className="italic">{monster.type},{monster.subtype}</span><br/>
-          <span>CR: {monster.challenge_rating}</span>
-          </h1>
+          <h1>{monster.name}</h1>
+          <div className="stats">
+            <p><span className="italic">{monster.type}{monster.subtype ? ", " : null}{monster.subtype}</span></p>
+            <p><span className="italic">{monster.alignment}</span></p>
+            <p><span>CR: {monster.challenge_rating}</span></p>
+          </div>
         </div>
 
         <div className="statSection">
-          <p>HP: {monster.hit_points}</p>
-          <p>AC: {monster.armor_class}</p>
+          <div className="stats">
+            <p>HP: {monster.hit_points}</p>
+            <p>AC: {monster.armor_class}</p>
+          </div>
         </div>
 
-        <div className="statSection"><p><b>Speed:</b></p>{monster.speed && Object.keys(monster.speed).map((item, i) => {
-          // return `${item}: ${monster.speed[item]} | `
-          return <p key={i}>{item}<br/>{monster.speed[item]}</p>
-        })}</div>
+        <div className="statSection">
+          <h4>Speed:</h4>
+          <div className="stats">
+          {monster.speed && Object.keys(monster.speed).map((item, i) => {
+            // return `${item}: ${monster.speed[item]} | `
+            return <p key={i}>{item}<br/>{monster.speed[item]}</p>
+          })}
+          </div>
+        </div>
 
         <div className="statSection">
+          <div className="stats">
           {baseStats.map((item, i) => {
             return <p key={i}>{item}<br/>{monster[item]} ( <AbilityMod baseScore={monster[item]} /> )</p>
           })}
+          </div>
         </div>
 
         {monster.proficiencies && monster.proficiencies.length > 0 &&
         <div className="statSection">
           <h4>Proficiencies:</h4>
+          <div className="stats">
           {monster.proficiencies.length > 0 && Object.keys(monster.proficiencies).map((item, i) => {
             // return `${item}: ${monster.speed[item]} | `
             return <p key={item}>{monster.proficiencies[i].name}<br/>
                     {monster.proficiencies[i].value}</p>
           })}
+          </div>
         </div>
         }
         {monster.damage_vulnerabilities && monster.damage_vulnerabilities.length > 0 &&
         <div className="statSection">
           <h4>Damage Vulnerabilities:</h4>
+          <div className="stats">
           {Object.keys(monster.damage_vulnerabilities).map((item, i) => {
             return <p key={i}>{monster.damage_vulnerabilities[i]}</p>
           })}
+          </div>
         </div>
         }
         {monster.damage_resistances && monster.damage_resistances.length > 0 &&
         <div className="statSection">
           <h4>Damage Resistances:</h4>
+          <div className="stats">
           {Object.keys(monster.damage_resistances).map((item, i) => {
             return <p key={i}>{monster.damage_resistances[i]}</p>
           })}
+          </div>
         </div>
         }
         {monster.damage_immunities && monster.damage_immunities.length > 0 &&
         <div className="statSection">
           <h4>Damage Immunities:</h4>
+          <div className="stats">
           {Object.keys(monster.damage_immunities).map((item, i) => {
             return <p key={i}>{monster.damage_immunities[i]}</p>
           })}
+          </div>
         </div>
         }
         {monster.condition_immunities && monster.condition_immunities.length > 0 &&
         <div className="statSection">
           <h4>Condition Immunities:</h4>
+          <div className="stats">
           {Object.keys(monster.condition_immunities).map((item, i) => {
             return <p key={i}>{monster.condition_immunities[i].name}</p>
           })}
+          </div>
         </div>
         }
         {monster.senses &&
         <div className="statSection">
           <h4>Senses:</h4>
+          <div className="stats">
           {Object.keys(monster.senses).map((i) => {
             return <p key={i}>{i}<br/>{monster.senses[i]}</p>
           })}
+          </div>
         </div>
         }
         <div className="statSection">
           <h4>Languages:</h4>
+          <div className="stats">
           <p>{monster.languages}</p>
+          </div>
         </div>
         {monster.special_abilities && monster.special_abilities.length > 0 &&
         <div className="verboseStatSection">
