@@ -7,32 +7,52 @@ body{
   color:#fff;
 }
 
-div.monsterDisplay div p{margin-left:2%;}
+.italic {
+  font-style: italic;
+}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.monsterDisplay h1 {
+  line-height: .5;
+  text-align: left;
+}
+
+.monsterDisplay .statSection h4 {
+    padding: 0 10px 0 0;
+}
+
+.monsterDisplay h1 span {
+  font-size: 14px;
+}
+
+.monsterDisplay .verboseStatSection h3 {
+  margin:0 0 5px 0;
+}
+
+.monsterDisplay .verboseStatSection p {
+  margin:0 0 30px 0;
+}
+.verboseStatSection {
+  border-top: 1px solid cyan;
+}
+
+.statSection {
+  display: flex;
+  text-transform: capitalize;
+  text-align: center;
+  margin: 0;
+}
+
+.statSection p {
+  margin-right: 25px;
+}
+.statSection span {
+  display: inline-flex;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .spin {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
